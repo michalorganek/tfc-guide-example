@@ -23,6 +23,7 @@ resource "random_pet" "table_name" {}
 resource "aws_dynamodb_table" "tfc_example_table" {
   name = "${var.db_table_name}-${random_pet.table_name.id}"
   hash_key       = "UUID"
+  billing_mode = "PAY_PER_REQUEST"
   tags = {
     Name = "test100"
   }
