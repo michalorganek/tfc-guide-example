@@ -33,3 +33,13 @@ resource "aws_dynamodb_table" "tfc_example_table" {
     type = "S"
   }
 }
+
+resource "aws_s3_bucket" "mybucket" {
+  bucket = "my-tf-test-bucket-${random_pet.table_name.id}"
+  acl    = "private"
+
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
+  }
+}
