@@ -1,3 +1,13 @@
+terraform {
+  backend "remote" {
+    organization = "michal-organek"
+
+    workspaces {
+      name = "test"
+    }
+  }
+}
+
 provider "aws" {
   version = "2.33.0"
 
@@ -16,6 +26,9 @@ resource "aws_dynamodb_table" "tfc_example_table" {
   read_capacity  = var.db_read_capacity
   write_capacity = var.db_write_capacity
   hash_key       = "UUID"
+  tags = {
+    Name = "test100"
+  }
 
   attribute {
     name = "UUID"
